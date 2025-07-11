@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "../App.css";
 export default function StudentList() {
   const [students, setStudents] = useState([]);
 
@@ -24,8 +24,13 @@ export default function StudentList() {
   };
 
   return (
-    <div>
-      <h1>Student List</h1>
+    <div className="ListContainer">
+    <div className="StudnetsList" >
+      <h1 style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start"
+      }}>Student List</h1>
       <ul>
         {students.map((student) => (
           <li key={student.id}>
@@ -38,5 +43,6 @@ export default function StudentList() {
         ))}
       </ul>
     </div>
+        </div>
   );
 }
