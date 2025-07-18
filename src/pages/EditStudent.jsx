@@ -1,33 +1,34 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import "../components/Edit.css";
 
 export default function EditStudent() {
   const { id } = useParams();
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [grade, setGrade] = useState('');
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [grade, setGrade] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:5000/students/${id}`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setName(data.name);
         setAge(data.age);
         setGrade(data.grade);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`http://localhost:5000/students/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, age: parseInt(age), grade }),
     })
-      .then(() => navigate('/'))
-      .catch(error => console.error(error));
+      .then(() => navigate("/"))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -43,7 +44,11 @@ export default function EditStudent() {
       <input
         type="number"
         value={age}
-        onChange={(e) => setAge(e.target.value)}
+        min={1}
+        onChange={(e) => {
+          const val = e.target.value;
+          if (val === "" || parseInt(val) >= 1) setAge(val);
+        }}
         placeholder="Age"
         required
       />
