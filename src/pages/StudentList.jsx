@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
+import { BsArrowsVertical } from "react-icons/bs";
 
 import "../components/Main.css";
 export default function StudentList({ searchTerm = "" }) {
@@ -29,24 +30,67 @@ export default function StudentList({ searchTerm = "" }) {
       .catch((error) => console.error("Error deleting student:", error));
   };
 
-  // Filter students by search term
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [sortColumn, setSortColumn] = useState(null);
+
+  function handleSort(column) {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      setSortColumn(column);
+      setSortDirection("asc");
+    }
+  }
+
+  const sortedStudents = [...filteredStudents].sort((a, b) => {
+    if (!sortColumn) return 0;
+    if (sortColumn === "name" || sortColumn === "grade") {
+      return sortDirection === "asc"
+        ? a[sortColumn].localeCompare(b[sortColumn])
+        : b[sortColumn].localeCompare(a[sortColumn]);
+    } else if (sortColumn === "age") {
+      return sortDirection === "asc" ? a.age - b.age : b.age - a.age;
+    }
+    return 0;
+  });
+  
 
   return (
     <>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Grade</th>
+            <th>
+              <button className="ThButton" onClick={() => handleSort("name")}>
+                Name{" "}
+                {sortColumn === "name" && (sortDirection === "asc" ? "▲" : "▼")}{" "}
+                <BsArrowsVertical />
+              </button>
+            </th>
+            <th>
+              <button className="ThButton" onClick={() => handleSort("age")}>
+                Age{" "}
+                {sortColumn === "age" && (sortDirection === "asc" ? "▲" : "▼")}{" "}
+                <BsArrowsVertical />
+              </button>
+            </th>
+            <th>
+              <button className="ThButton" onClick={() => handleSort("grade")}>
+                Grade{" "}
+                {sortColumn === "grade" &&
+                  (sortDirection === "asc" ? "▲" : "▼")}{" "}
+                <BsArrowsVertical />
+              </button>
+            </th>
             <th>D/E</th>
           </tr>
         </thead>
         <tbody>
-          {filteredStudents.map((student) => (
+          {sortedStudents.map((student) => (
             <tr key={student.id}>
               <td>{student.name}</td>
               <td>{student.age}</td>

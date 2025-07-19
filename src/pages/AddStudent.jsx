@@ -41,6 +41,7 @@ export default function AddStudent() {
           onChange={(e) => setAge(e.target.value)}
           placeholder="Age"
           required
+          min={0}
         />
         <input
           className="add-student-input"

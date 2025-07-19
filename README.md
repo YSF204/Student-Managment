@@ -9,7 +9,7 @@ Below is a professional and detailed `README.md` file for your **Student Managem
 
 A simple React-based application that allows users to perform CRUD (Create, Read, Update, Delete) operations on student records stored in a local JSON server. The app uses React state management, controlled forms, Fetch API for data interaction, custom hooks for reusable logic, and navigation using React Router.
 
-##  Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Installation](#installation)
@@ -21,7 +21,7 @@ A simple React-based application that allows users to perform CRUD (Create, Read
 
 ---
 
-##  Features
+## Features
 
 - **CRUD Operations**: Add, view, edit, and delete student records.
 - **State Management**: Manage student data using React's `useState` and `useEffect`.
@@ -32,22 +32,23 @@ A simple React-based application that allows users to perform CRUD (Create, Read
 
 ---
 
-
-
 ## Installation
 
 1. **Clone the Repository**:
+
    ```
    git clone https://github.com/njuneidi/student-management-app.git
    cd student-management-app
    ```
 
 2. **Install Dependencies**:
+
    ```
    npm install
    ```
 
 3. **Set Up JSON Server**:
+
    - Start the JSON server to simulate the backend:
      ```
      npm run server
@@ -63,23 +64,27 @@ A simple React-based application that allows users to perform CRUD (Create, Read
 
 ---
 
-##  Usage
+## Usage
 
 ### 1. View Students
+
 - Navigate to the **Home** page (`/`) to see a list of all students.
 
 ### 2. Add a New Student
+
 - Go to the **Add Student** page (`/add`) and fill out the form to add a new student.
 
 ### 3. Edit a Student Record
+
 - Click the "Edit" button next to a student's name to update their details.
 
 ### 4. Delete a Student Record
+
 - Click the "Delete" button next to a student's name to remove them from the list.
 
 ---
 
-##  Project Structure
+## Project Structure
 
 The project is organized as follows:
 
@@ -101,7 +106,7 @@ student-management-app/
 
 ---
 
-##  API Endpoints
+## API Endpoints
 
 The JSON server provides the following endpoints:
 
@@ -111,6 +116,7 @@ The JSON server provides the following endpoints:
 - **DELETE `/students/:id`**: Delete a student record.
 
 Example JSON structure:
+
 ```json
 {
   "students": [
@@ -120,6 +126,37 @@ Example JSON structure:
 }
 ```
 
+## Deploying to GitHub Pages
 
+1. **Set the base path in `vite.config.js`:**
 
-# student-management
+   - Make sure the `base` property is set to your repo name, e.g. `/student-management/`.
+
+2. **Install gh-pages:**
+
+   ```bash
+   npm install --save-dev gh-pages
+   ```
+
+3. **Add deploy scripts to `package.json`:**
+
+   ```json
+   "scripts": {
+     // ... existing scripts ...
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d dist"
+   }
+   ```
+
+4. **Build and deploy:**
+
+   ```bash
+   npm run deploy
+   ```
+
+5. **Set GitHub Pages source:**
+
+   - In your GitHub repo, go to Settings > Pages and set the source to the `gh-pages` branch.
+
+6. **Access your site:**
+   - Visit `https://<your-username>.github.io/<repo-name>/`

@@ -87,6 +87,20 @@ nav .search-bar {
 nav .search-bar:focus {
   border: 1.5px solid #1a253c;
 }
+.ThButton {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  display: block;
+  cursor: pointer;
+  text-align: inherit;
+}
+
 @media (max-width: 760px) {
   nav {
     flex-wrap: wrap;

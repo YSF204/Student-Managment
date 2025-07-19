@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./navBar.css";
+import { CiSearch } from "react-icons/ci";
 
 export default function NavBar({ onSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
